@@ -30,48 +30,54 @@
         <h1>Is this video right for you?</h1>
         <p class="lead">Paste a YouTube link and its transcript. VideoFit scores how well the video fits your learning goal, and lets you ask it questions with clickable timestamps.</p>
 
-        <label for="url">YouTube URL</label>
-        <input id="url" type="url" placeholder="https://www.youtube.com/watch?v=...">
+        <div class="form-cols">
+          <div class="col-fields">
+            <label for="url">YouTube URL</label>
+            <input id="url" type="url" placeholder="https://www.youtube.com/watch?v=...">
 
-        <label for="goal">What do you want to learn?</label>
-        <input id="goal" type="text" maxlength="500" placeholder="e.g. Learn deep learning from beginner to intermediate">
+            <label for="goal">What do you want to learn?</label>
+            <input id="goal" type="text" maxlength="500" placeholder="e.g. Learn deep learning from beginner to intermediate">
 
-        <div class="row">
-          <div>
-            <label for="level">Your current level</label>
-            <select id="level">
-              <option value="beginner">Beginner</option>
-              <option value="intermediate">Intermediate</option>
-              <option value="advanced">Advanced</option>
-            </select>
+            <div class="row">
+              <div>
+                <label for="level">Your current level</label>
+                <select id="level">
+                  <option value="beginner">Beginner</option>
+                  <option value="intermediate">Intermediate</option>
+                  <option value="advanced">Advanced</option>
+                </select>
+              </div>
+              <div>
+                <label for="language">Answer language</label>
+                <select id="language">
+                  <option>English</option><option>Hindi</option><option>Marathi</option><option>Hinglish</option>
+                </select>
+              </div>
+            </div>
+
+            <details>
+              <summary>Topic checklist <span class="muted">(optional)</span></summary>
+              <p class="hint">One topic per line. Leave empty to let the model build a checklist from your goal. Writing your own makes repeated scores comparable.</p>
+              <textarea id="topics" rows="4" placeholder="Gradient descent&#10;Backpropagation&#10;Overfitting"></textarea>
+            </details>
+
+            <details>
+              <summary>Audience comments <span class="muted">(optional)</span></summary>
+              <p class="hint">One comment per line. They are summarized separately and never change the score.</p>
+              <textarea id="comments" rows="4" placeholder="Paste comments here, one per line"></textarea>
+            </details>
           </div>
-          <div>
-            <label for="language">Answer language</label>
-            <select id="language">
-              <option>English</option><option>Hindi</option><option>Marathi</option><option>Hinglish</option>
-            </select>
+
+          <div class="col-transcript">
+            <div class="label-row">
+              <label for="transcript">Transcript</label>
+              <button type="button" class="link" id="demo-btn">Use demo transcript</button>
+            </div>
+            <textarea id="transcript" class="mono" spellcheck="false"
+              placeholder="Paste the transcript here. Timestamped text, SRT and VTT are supported. Hindi, Marathi and Hinglish work too."></textarea>
+            <p class="hint" id="demo-note" hidden></p>
           </div>
         </div>
-
-        <div class="label-row">
-          <label for="transcript">Transcript</label>
-          <button type="button" class="link" id="demo-btn">Use demo transcript</button>
-        </div>
-        <textarea id="transcript" rows="9" class="mono" spellcheck="false"
-          placeholder="Paste the transcript here. Timestamped text, SRT and VTT are supported. Hindi, Marathi and Hinglish work too."></textarea>
-        <p class="hint" id="demo-note" hidden></p>
-
-        <details>
-          <summary>Topic checklist <span class="muted">(optional)</span></summary>
-          <p class="hint">One topic per line. Leave empty to let the model build a checklist from your goal. Writing your own makes repeated scores comparable.</p>
-          <textarea id="topics" rows="4" placeholder="Gradient descent&#10;Backpropagation&#10;Overfitting"></textarea>
-        </details>
-
-        <details>
-          <summary>Audience comments <span class="muted">(optional)</span></summary>
-          <p class="hint">One comment per line. They are summarized separately and never change the score.</p>
-          <textarea id="comments" rows="4" placeholder="Paste comments here, one per line"></textarea>
-        </details>
 
         <div class="actions">
           <button type="submit" class="btn primary" id="analyze-btn">Analyze video</button>

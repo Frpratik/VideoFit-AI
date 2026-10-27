@@ -23,7 +23,8 @@ COMMENTS = "\n".join([
 ])
 
 
-def main(channel: str = "msedge") -> None:
+def main(channel: str = "msedge", only: str = "") -> None:
+    """`only="load"` captures just the load page (no model calls)."""
     OUT.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as p:
         browser = p.chromium.launch(channel=channel)
@@ -35,6 +36,10 @@ def main(channel: str = "msedge") -> None:
         page.locator("details:has(#comments)").evaluate("d => d.open = true")
         page.fill("#comments", COMMENTS)
         page.screenshot(path=str(OUT / "01-load.png"))
+        if only == "load":
+            browser.close()
+            print("saved to", OUT)
+            return
 
         page.click("#analyze-btn")
         page.wait_for_function("!document.getElementById('dash').hidden", timeout=300_000)
@@ -60,4 +65,4 @@ def main(channel: str = "msedge") -> None:
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:2])
+    main(*sys.argv[1:3])
