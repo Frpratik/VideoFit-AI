@@ -1,0 +1,1217 @@
+{
+ "model": "openai/gpt-oss-20b",
+ "usage": {
+  "calls": 96,
+  "input_tokens": 94242,
+  "output_tokens": 37398
+ },
+ "summary": {
+  "fixed": {
+   "runs": 4,
+   "failed": 0,
+   "overall": {
+    "n": 4,
+    "mean": 68.6,
+    "sd": 1.0,
+    "min": 68.1,
+    "max": 70.0
+   },
+   "criteria": {
+    "topic_coverage": {
+     "n": 4,
+     "mean": 57.7,
+     "sd": 0.0,
+     "min": 57.7,
+     "max": 57.7
+    },
+    "depth": {
+     "n": 4,
+     "mean": 70.0,
+     "sd": 0.0,
+     "min": 70.0,
+     "max": 70.0
+    },
+    "examples": {
+     "n": 4,
+     "mean": 53.1,
+     "sd": 6.2,
+     "min": 50.0,
+     "max": 62.5
+    },
+    "level_fit": {
+     "n": 4,
+     "mean": 100.0,
+     "sd": 0.0,
+     "min": 100.0,
+     "max": 100.0
+    },
+    "clarity": {
+     "n": 4,
+     "mean": 100.0,
+     "sd": 0.0,
+     "min": 100.0,
+     "max": 100.0
+    }
+   }
+  },
+  "auto": {
+   "runs": 4,
+   "failed": 0,
+   "overall": {
+    "n": 4,
+    "mean": 73.0,
+    "sd": 4.2,
+    "min": 68.8,
+    "max": 78.6
+   },
+   "criteria": {
+    "topic_coverage": {
+     "n": 4,
+     "mean": 66.1,
+     "sd": 3.6,
+     "min": 64.3,
+     "max": 71.4
+    },
+    "depth": {
+     "n": 4,
+     "mean": 66.2,
+     "sd": 4.3,
+     "min": 62.5,
+     "max": 70.0
+    },
+    "examples": {
+     "n": 4,
+     "mean": 66.7,
+     "sd": 13.6,
+     "min": 50.0,
+     "max": 83.3
+    },
+    "level_fit": {
+     "n": 4,
+     "mean": 100.0,
+     "sd": 0.0,
+     "min": 100.0,
+     "max": 100.0
+    },
+    "clarity": {
+     "n": 4,
+     "mean": 100.0,
+     "sd": 0.0,
+     "min": 100.0,
+     "max": 100.0
+    }
+   }
+  },
+  "topic_accuracy": {
+   "exact_coverage_accuracy": 0.923,
+   "detected_vs_not_accuracy": 1.0,
+   "false_positive_rate_on_absent_topics": 0.0,
+   "recall_on_present_topics": 1.0,
+   "evidence_precision_cited_segment_in_gold_window": 0.78,
+   "has_example_accuracy_on_unambiguous_topics": 1.0,
+   "confusion_gold_to_predicted": {
+    "covered->covered": 24,
+    "not_detected->not_detected": 20,
+    "partial->covered": 4,
+    "partial->partial": 4
+   },
+   "label_agreement_across_runs_per_topic": {
+    "Neuron, weights and bias": 1.0,
+    "Activation functions (ReLU, sigmoid)": 1.0,
+    "Loss function (for example mean squared error)": 1.0,
+    "Gradient descent": 1.0,
+    "Learning rate": 1.0,
+    "Backpropagation": 1.0,
+    "Overfitting and validation sets": 1.0,
+    "Epochs and batch size": 1.0,
+    "Convolutional neural networks": 1.0,
+    "Transformers and attention": 1.0,
+    "Dropout regularization": 1.0,
+    "Recurrent neural networks": 1.0,
+    "Batch normalization": 1.0
+   }
+  }
+ },
+ "runs": {
+  "fixed": [
+   {
+    "overall": 68.1,
+    "criteria": {
+     "topic_coverage": 57.7,
+     "depth": 70.0,
+     "examples": 50.0,
+     "level_fit": 100.0,
+     "clarity": 100.0
+    },
+    "topics": [
+     {
+      "name": "Neuron, weights and bias",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       31.0,
+       42.0,
+       54.0
+      ]
+     },
+     {
+      "name": "Activation functions (ReLU, sigmoid)",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       78.0,
+       89.0,
+       102.0,
+       300.0
+      ]
+     },
+     {
+      "name": "Loss function (for example mean squared error)",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       160.0,
+       173.0
+      ]
+     },
+     {
+      "name": "Gradient descent",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       195.0,
+       202.0,
+       214.0,
+       224.0,
+       237.0,
+       245.0
+      ]
+     },
+     {
+      "name": "Learning rate",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       245.0,
+       237.0,
+       195.0,
+       202.0,
+       214.0,
+       224.0
+      ]
+     },
+     {
+      "name": "Backpropagation",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       259.0,
+       268.0,
+       278.0,
+       291.0
+      ]
+     },
+     {
+      "name": "Overfitting and validation sets",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       353.0,
+       364.0,
+       376.0,
+       387.0,
+       347.0
+      ]
+     },
+     {
+      "name": "Epochs and batch size",
+      "coverage": "partial",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       323.0,
+       335.0
+      ]
+     },
+     {
+      "name": "Convolutional neural networks",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Transformers and attention",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Dropout regularization",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Recurrent neural networks",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Batch normalization",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     }
+    ]
+   },
+   {
+    "overall": 68.1,
+    "criteria": {
+     "topic_coverage": 57.7,
+     "depth": 70.0,
+     "examples": 50.0,
+     "level_fit": 100.0,
+     "clarity": 100.0
+    },
+    "topics": [
+     {
+      "name": "Neuron, weights and bias",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       31.0,
+       42.0,
+       54.0
+      ]
+     },
+     {
+      "name": "Activation functions (ReLU, sigmoid)",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       78.0,
+       89.0,
+       102.0,
+       300.0
+      ]
+     },
+     {
+      "name": "Loss function (for example mean squared error)",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       160.0,
+       173.0
+      ]
+     },
+     {
+      "name": "Gradient descent",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       195.0,
+       202.0,
+       214.0,
+       224.0,
+       237.0,
+       245.0
+      ]
+     },
+     {
+      "name": "Learning rate",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       245.0,
+       237.0,
+       195.0,
+       202.0,
+       214.0,
+       224.0
+      ]
+     },
+     {
+      "name": "Backpropagation",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       259.0,
+       268.0,
+       278.0,
+       291.0
+      ]
+     },
+     {
+      "name": "Overfitting and validation sets",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       353.0,
+       364.0,
+       376.0,
+       387.0,
+       347.0
+      ]
+     },
+     {
+      "name": "Epochs and batch size",
+      "coverage": "partial",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       323.0
+      ]
+     },
+     {
+      "name": "Convolutional neural networks",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Transformers and attention",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Dropout regularization",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Recurrent neural networks",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Batch normalization",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     }
+    ]
+   },
+   {
+    "overall": 70.0,
+    "criteria": {
+     "topic_coverage": 57.7,
+     "depth": 70.0,
+     "examples": 62.5,
+     "level_fit": 100.0,
+     "clarity": 100.0
+    },
+    "topics": [
+     {
+      "name": "Neuron, weights and bias",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       31.0,
+       42.0,
+       54.0
+      ]
+     },
+     {
+      "name": "Activation functions (ReLU, sigmoid)",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       78.0,
+       89.0,
+       102.0,
+       300.0
+      ]
+     },
+     {
+      "name": "Loss function (for example mean squared error)",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       160.0,
+       173.0
+      ]
+     },
+     {
+      "name": "Gradient descent",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       195.0,
+       202.0,
+       214.0,
+       224.0,
+       237.0,
+       245.0
+      ]
+     },
+     {
+      "name": "Learning rate",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       245.0,
+       237.0
+      ]
+     },
+     {
+      "name": "Backpropagation",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       259.0,
+       268.0,
+       278.0,
+       291.0
+      ]
+     },
+     {
+      "name": "Overfitting and validation sets",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       353.0,
+       364.0,
+       376.0,
+       387.0,
+       347.0
+      ]
+     },
+     {
+      "name": "Epochs and batch size",
+      "coverage": "partial",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       323.0
+      ]
+     },
+     {
+      "name": "Convolutional neural networks",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Transformers and attention",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Dropout regularization",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Recurrent neural networks",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Batch normalization",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     }
+    ]
+   },
+   {
+    "overall": 68.1,
+    "criteria": {
+     "topic_coverage": 57.7,
+     "depth": 70.0,
+     "examples": 50.0,
+     "level_fit": 100.0,
+     "clarity": 100.0
+    },
+    "topics": [
+     {
+      "name": "Neuron, weights and bias",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       31.0,
+       42.0,
+       54.0
+      ]
+     },
+     {
+      "name": "Activation functions (ReLU, sigmoid)",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       78.0,
+       89.0,
+       102.0,
+       300.0
+      ]
+     },
+     {
+      "name": "Loss function (for example mean squared error)",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       160.0,
+       173.0
+      ]
+     },
+     {
+      "name": "Gradient descent",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       195.0,
+       202.0,
+       214.0,
+       224.0,
+       237.0,
+       245.0
+      ]
+     },
+     {
+      "name": "Learning rate",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       245.0,
+       237.0
+      ]
+     },
+     {
+      "name": "Backpropagation",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       259.0,
+       268.0,
+       278.0,
+       291.0
+      ]
+     },
+     {
+      "name": "Overfitting and validation sets",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       353.0,
+       364.0,
+       376.0,
+       387.0,
+       347.0
+      ]
+     },
+     {
+      "name": "Epochs and batch size",
+      "coverage": "partial",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       323.0,
+       335.0
+      ]
+     },
+     {
+      "name": "Convolutional neural networks",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Transformers and attention",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Dropout regularization",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Recurrent neural networks",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Batch normalization",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     }
+    ]
+   }
+  ],
+  "auto": [
+   {
+    "overall": 73.2,
+    "criteria": {
+     "topic_coverage": 64.3,
+     "depth": 70.0,
+     "examples": 66.7,
+     "level_fit": 100.0,
+     "clarity": 100.0
+    },
+    "topics": [
+     {
+      "name": "What is a Neural Network",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       19.0,
+       31.0,
+       42.0,
+       115.0,
+       126.0,
+       138.0,
+       268.0,
+       278.0
+      ]
+     },
+     {
+      "name": "Basic Math: Linear Algebra",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Activation Functions",
+      "coverage": "partial",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       78.0,
+       89.0,
+       102.0
+      ]
+     },
+     {
+      "name": "Loss Functions",
+      "coverage": "partial",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       160.0,
+       173.0
+      ]
+     },
+     {
+      "name": "Backpropagation",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       259.0,
+       268.0,
+       278.0
+      ]
+     },
+     {
+      "name": "Gradient Descent",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       245.0,
+       259.0,
+       268.0,
+       278.0,
+       195.0,
+       202.0,
+       214.0,
+       224.0,
+       237.0,
+       160.0,
+       173.0,
+       185.0,
+       323.0,
+       335.0
+      ]
+     },
+     {
+      "name": "Overfitting & Regularization",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Practical Implementation with Python",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       291.0,
+       300.0
+      ]
+     }
+    ]
+   },
+   {
+    "overall": 68.8,
+    "criteria": {
+     "topic_coverage": 64.3,
+     "depth": 62.5,
+     "examples": 50.0,
+     "level_fit": 100.0,
+     "clarity": 100.0
+    },
+    "topics": [
+     {
+      "name": "What is a Neural Network",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       19.0,
+       31.0,
+       42.0,
+       115.0,
+       126.0,
+       138.0
+      ]
+     },
+     {
+      "name": "Basic Math: Linear Algebra",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Activation Functions",
+      "coverage": "partial",
+      "depth": "mention",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       78.0,
+       89.0,
+       102.0
+      ]
+     },
+     {
+      "name": "Loss Functions",
+      "coverage": "partial",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       160.0,
+       173.0
+      ]
+     },
+     {
+      "name": "Backpropagation",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       259.0,
+       268.0,
+       278.0,
+       291.0
+      ]
+     },
+     {
+      "name": "Gradient Descent",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       195.0,
+       202.0,
+       214.0,
+       224.0,
+       237.0,
+       245.0,
+       259.0,
+       268.0,
+       278.0,
+       291.0,
+       300.0,
+       310.0,
+       323.0,
+       335.0,
+       347.0,
+       353.0
+      ]
+     },
+     {
+      "name": "Overfitting & Regularization",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Practical Implementation with Python",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       291.0,
+       300.0
+      ]
+     }
+    ]
+   },
+   {
+    "overall": 71.3,
+    "criteria": {
+     "topic_coverage": 64.3,
+     "depth": 62.5,
+     "examples": 66.7,
+     "level_fit": 100.0,
+     "clarity": 100.0
+    },
+    "topics": [
+     {
+      "name": "What is a Neural Network",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       19.0,
+       31.0,
+       42.0,
+       115.0,
+       126.0,
+       138.0
+      ]
+     },
+     {
+      "name": "Basic Math: Linear Algebra",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Activation Functions",
+      "coverage": "partial",
+      "depth": "mention",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       78.0,
+       89.0,
+       102.0
+      ]
+     },
+     {
+      "name": "Loss Functions",
+      "coverage": "partial",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       160.0,
+       173.0
+      ]
+     },
+     {
+      "name": "Backpropagation",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       259.0,
+       268.0,
+       278.0,
+       291.0
+      ]
+     },
+     {
+      "name": "Gradient Descent",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       245.0,
+       259.0,
+       268.0,
+       278.0,
+       291.0,
+       300.0,
+       310.0,
+       323.0,
+       335.0,
+       195.0,
+       202.0,
+       214.0,
+       224.0,
+       237.0,
+       138.0,
+       149.0,
+       160.0,
+       173.0,
+       185.0
+      ]
+     },
+     {
+      "name": "Overfitting & Regularization",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Practical Implementation with Python",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       291.0,
+       300.0
+      ]
+     }
+    ]
+   },
+   {
+    "overall": 78.6,
+    "criteria": {
+     "topic_coverage": 71.4,
+     "depth": 70.0,
+     "examples": 83.3,
+     "level_fit": 100.0,
+     "clarity": 100.0
+    },
+    "topics": [
+     {
+      "name": "What is a Neural Network",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       19.0,
+       31.0,
+       42.0,
+       115.0,
+       126.0,
+       138.0,
+       268.0,
+       278.0
+      ]
+     },
+     {
+      "name": "Basic Math: Linear Algebra",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Activation Functions",
+      "coverage": "partial",
+      "depth": "explained",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": [
+       78.0,
+       89.0,
+       102.0
+      ]
+     },
+     {
+      "name": "Loss Functions",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       160.0,
+       173.0,
+       310.0
+      ]
+     },
+     {
+      "name": "Backpropagation",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       259.0,
+       268.0,
+       278.0,
+       291.0
+      ]
+     },
+     {
+      "name": "Gradient Descent",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       195.0,
+       202.0,
+       214.0,
+       224.0,
+       237.0,
+       245.0,
+       259.0,
+       268.0,
+       278.0,
+       291.0,
+       310.0,
+       323.0,
+       335.0
+      ]
+     },
+     {
+      "name": "Overfitting & Regularization",
+      "coverage": "not_detected",
+      "depth": "none",
+      "has_example": false,
+      "assessed": true,
+      "cited_starts": []
+     },
+     {
+      "name": "Practical Implementation with Python",
+      "coverage": "covered",
+      "depth": "explained",
+      "has_example": true,
+      "assessed": true,
+      "cited_starts": [
+       291.0,
+       300.0
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

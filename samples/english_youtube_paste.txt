@@ -1,0 +1,10 @@
+﻿0:00
+welcome to this deep learning course
+0:06
+today we will learn what a neural network is
+0:14
+each neuron takes inputs multiplies them by weights and adds a bias
+0:27
+then an activation function like relu decides the output
+0:41
+now let's see gradient descent with a simple example

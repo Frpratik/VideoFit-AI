@@ -1,0 +1,20 @@
+﻿# VideoFit AI - tested with Python 3.12 on Windows 11
+python-dotenv
+pydantic>=2.7
+
+# LLM + workflow
+langchain-groq
+langgraph
+
+# retrieval (local multilingual embeddings + vector store)
+langchain-chroma
+langchain-huggingface
+sentence-transformers
+
+# web app
+fastapi
+uvicorn
+
+# tests
+pytest>=8.0
+httpx

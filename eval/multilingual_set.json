@@ -1,0 +1,261 @@
+{
+  "_note": "SYNTHETIC parallel corpus written for testing (not real YouTube transcripts). Each concept has the same idea in English (en), Hindi (hi), Marathi (mr) and Hinglish (hinglish = Romanized Hindi with English technical terms). Segment i is placed at i*10 seconds. Queries exist in five styles: en, hi, mr, hinglish, mixed (Devanagari Hindi with English technical terms). Gold answer for every query = the concept's own segment. Needs review by a native Hindi/Marathi speaker before any accuracy claim.",
+  "concepts": [
+    {
+      "id": "c01", "topic": "neuron",
+      "segments": {
+        "en": "A neuron takes several inputs, multiplies each one by a weight, adds a bias, and produces a single number.",
+        "hi": "एक न्यूरॉन कई इनपुट लेता है, हर इनपुट को वेट से गुणा करता है, बायस जोड़ता है और एक संख्या देता है।",
+        "mr": "एक न्यूरॉन अनेक इनपुट घेतो, प्रत्येक इनपुटला वेटने गुणतो, बायस जोडतो आणि एक संख्या देतो.",
+        "hinglish": "Ek neuron kai inputs leta hai, har input ko weight se multiply karta hai, bias add karta hai aur ek number deta hai."
+      },
+      "queries": {
+        "en": "How does a single neuron compute its output?",
+        "hi": "एक न्यूरॉन अपना आउटपुट कैसे निकालता है?",
+        "mr": "एक न्यूरॉन आपले आउटपुट कसे काढतो?",
+        "hinglish": "Ek neuron apna output kaise nikalta hai?",
+        "mixed": "neuron का output कैसे calculate होता है?"
+      }
+    },
+    {
+      "id": "c02", "topic": "activation function",
+      "segments": {
+        "en": "An activation function such as ReLU decides whether the neuron fires; it outputs zero for negative values.",
+        "hi": "ReLU जैसा एक्टिवेशन फंक्शन तय करता है कि न्यूरॉन सक्रिय होगा या नहीं; नेगेटिव वैल्यू पर यह शून्य देता है।",
+        "mr": "ReLU सारखे ॲक्टिव्हेशन फंक्शन ठरवते की न्यूरॉन सक्रिय होईल की नाही; निगेटिव्ह व्हॅल्यूसाठी ते शून्य देते.",
+        "hinglish": "ReLU jaisa activation function decide karta hai ki neuron fire karega ya nahi; negative values par ye zero deta hai."
+      },
+      "queries": {
+        "en": "What does the ReLU activation function do?",
+        "hi": "ReLU एक्टिवेशन फंक्शन क्या करता है?",
+        "mr": "ReLU ॲक्टिव्हेशन फंक्शन काय करते?",
+        "hinglish": "ReLU activation function kya karta hai?",
+        "mixed": "ReLU activation function क्या करता है?"
+      }
+    },
+    {
+      "id": "c03", "topic": "loss function",
+      "segments": {
+        "en": "The loss function measures how far the model's predictions are from the true answers, for example mean squared error.",
+        "hi": "लॉस फंक्शन मापता है कि मॉडल की भविष्यवाणियाँ सही उत्तरों से कितनी दूर हैं, जैसे मीन स्क्वेयर्ड एरर।",
+        "mr": "लॉस फंक्शन मॉडेलचे अंदाज खऱ्या उत्तरांपासून किती दूर आहेत ते मोजते, उदाहरणार्थ मीन स्क्वेअर्ड एरर.",
+        "hinglish": "Loss function napta hai ki model ki predictions sahi answers se kitni door hain, jaise mean squared error."
+      },
+      "queries": {
+        "en": "How do we measure the error of the model?",
+        "hi": "हम मॉडल की गलती कैसे मापते हैं?",
+        "mr": "आपण मॉडेलची चूक कशी मोजतो?",
+        "hinglish": "Hum model ki galti kaise napte hain?",
+        "mixed": "model की error कैसे measure करते हैं?"
+      }
+    },
+    {
+      "id": "c04", "topic": "gradient descent",
+      "segments": {
+        "en": "Gradient descent lowers the loss by repeatedly moving the weights a small step in the direction that reduces it.",
+        "hi": "ग्रेडिएंट डिसेंट वेट्स को बार-बार छोटे कदम में उस दिशा में ले जाकर लॉस घटाता है जिससे वह कम होता है।",
+        "mr": "ग्रेडियंट डिसेंट वेट्सना वारंवार लहान पावलांमध्ये लॉस कमी करणाऱ्या दिशेने नेऊन लॉस कमी करते.",
+        "hinglish": "Gradient descent weights ko baar baar chhote step mein us direction mein le jaakar loss kam karta hai jisse loss ghatta hai."
+      },
+      "queries": {
+        "en": "How does gradient descent reduce the loss?",
+        "hi": "ग्रेडिएंट डिसेंट लॉस को कैसे कम करता है?",
+        "mr": "ग्रेडियंट डिसेंट लॉस कसा कमी करते?",
+        "hinglish": "Gradient descent loss ko kaise kam karta hai?",
+        "mixed": "gradient descent से loss कैसे कम होता है?"
+      }
+    },
+    {
+      "id": "c05", "topic": "learning rate",
+      "segments": {
+        "en": "The learning rate controls the size of each step; too large and training jumps around, too small and it is very slow.",
+        "hi": "लर्निंग रेट हर कदम का आकार तय करती है; बहुत बड़ी हो तो ट्रेनिंग उछलती रहती है, बहुत छोटी हो तो बहुत धीमी होती है।",
+        "mr": "लर्निंग रेट प्रत्येक पावलाचा आकार ठरवतो; खूप मोठा असेल तर ट्रेनिंग उड्या मारते, खूप लहान असेल तर ती खूप हळू होते.",
+        "hinglish": "Learning rate har step ka size control karta hai; bahut badi ho to training idhar udhar kudti hai, bahut chhoti ho to bahut slow hoti hai."
+      },
+      "queries": {
+        "en": "What happens if the learning rate is too large?",
+        "hi": "अगर लर्निंग रेट बहुत बड़ी हो तो क्या होता है?",
+        "mr": "लर्निंग रेट खूप मोठा असेल तर काय होते?",
+        "hinglish": "Agar learning rate bahut badi ho to kya hota hai?",
+        "mixed": "learning rate बहुत large हो तो क्या होता है?"
+      }
+    },
+    {
+      "id": "c06", "topic": "backpropagation",
+      "segments": {
+        "en": "Backpropagation uses the chain rule to pass the error backwards through the layers and compute each weight's gradient.",
+        "hi": "बैकप्रोपेगेशन चेन रूल का उपयोग करके एरर को लेयर्स में पीछे भेजता है और हर वेट का ग्रेडिएंट निकालता है।",
+        "mr": "बॅकप्रोपगेशन चेन रूल वापरून एरर लेयर्समधून मागे पाठवते आणि प्रत्येक वेटचा ग्रेडियंट काढते.",
+        "hinglish": "Backpropagation chain rule ka use karke error ko layers mein peeche bhejta hai aur har weight ka gradient nikalta hai."
+      },
+      "queries": {
+        "en": "How did the instructor explain backpropagation?",
+        "hi": "टीचर ने बैकप्रोपेगेशन कैसे समझाया?",
+        "mr": "शिक्षकांनी बॅकप्रोपगेशन कसे समजावले?",
+        "hinglish": "Teacher ne backpropagation kaise samjhaya?",
+        "mixed": "backpropagation में error layers में पीछे कैसे जाता है?"
+      }
+    },
+    {
+      "id": "c07", "topic": "overfitting",
+      "segments": {
+        "en": "Overfitting happens when the model memorizes the training data and performs badly on new data it has not seen.",
+        "hi": "ओवरफिटिंग तब होती है जब मॉडल ट्रेनिंग डेटा को रट लेता है और नए डेटा पर खराब प्रदर्शन करता है।",
+        "mr": "ओव्हरफिटिंग तेव्हा होते जेव्हा मॉडेल ट्रेनिंग डेटा पाठ करते आणि नवीन डेटावर वाईट कामगिरी करते.",
+        "hinglish": "Overfitting tab hoti hai jab model training data ko ratt leta hai aur naye data par kharab perform karta hai."
+      },
+      "queries": {
+        "en": "What is overfitting?",
+        "hi": "ओवरफिटिंग क्या है?",
+        "mr": "ओव्हरफिटिंग म्हणजे काय?",
+        "hinglish": "Overfitting kya hoti hai?",
+        "mixed": "overfitting क्या होती है और क्यों होती है?"
+      }
+    },
+    {
+      "id": "c08", "topic": "dropout",
+      "segments": {
+        "en": "Dropout randomly switches off some neurons during training so the network cannot depend too much on any single one.",
+        "hi": "ड्रॉपआउट ट्रेनिंग के दौरान कुछ न्यूरॉन्स को बेतरतीब ढंग से बंद कर देता है ताकि नेटवर्क किसी एक पर ज़्यादा निर्भर न रहे।",
+        "mr": "ड्रॉपआउट ट्रेनिंगदरम्यान काही न्यूरॉन्स यादृच्छिकपणे बंद करतो जेणेकरून नेटवर्क कोणत्याही एकावर जास्त अवलंबून राहणार नाही.",
+        "hinglish": "Dropout training ke dauran kuch neurons ko random tareeke se band kar deta hai taaki network kisi ek par zyada depend na kare."
+      },
+      "queries": {
+        "en": "Why do we switch off neurons randomly during training?",
+        "hi": "ट्रेनिंग के दौरान न्यूरॉन्स को बेतरतीब क्यों बंद करते हैं?",
+        "mr": "ट्रेनिंगदरम्यान न्यूरॉन्स यादृच्छिकपणे का बंद करतात?",
+        "hinglish": "Training ke dauran neurons ko random kyun band karte hain?",
+        "mixed": "dropout में neurons को randomly क्यों off करते हैं?"
+      }
+    },
+    {
+      "id": "c09", "topic": "convolutional neural network",
+      "segments": {
+        "en": "A convolutional neural network slides small filters over an image to detect edges and other local patterns.",
+        "hi": "कन्वोल्यूशनल न्यूरल नेटवर्क इमेज पर छोटे फिल्टर घुमाकर किनारों और दूसरे स्थानीय पैटर्न को पहचानता है।",
+        "mr": "कॉन्व्होल्यूशनल न्यूरल नेटवर्क इमेजवर लहान फिल्टर फिरवून कडा आणि इतर स्थानिक पॅटर्न ओळखते.",
+        "hinglish": "Convolutional neural network image par chhote filters slide karke edges aur dusre local patterns detect karta hai."
+      },
+      "queries": {
+        "en": "What is a CNN?",
+        "hi": "CNN क्या है?",
+        "mr": "CNN म्हणजे काय?",
+        "hinglish": "CNN kya hota hai?",
+        "mixed": "CNN में filters image पर क्या करते हैं?"
+      }
+    },
+    {
+      "id": "c10", "topic": "max pooling",
+      "segments": {
+        "en": "Max pooling shrinks the feature map by keeping only the largest value in each small window.",
+        "hi": "मैक्स पूलिंग हर छोटी विंडो में सिर्फ़ सबसे बड़ी वैल्यू रखकर फ़ीचर मैप को छोटा कर देती है।",
+        "mr": "मॅक्स पूलिंग प्रत्येक लहान विंडोमध्ये फक्त सर्वात मोठी व्हॅल्यू ठेवून फीचर मॅप लहान करते.",
+        "hinglish": "Max pooling har chhoti window mein sirf sabse badi value rakhkar feature map ko chhota kar deti hai."
+      },
+      "queries": {
+        "en": "How does max pooling reduce the size of the feature map?",
+        "hi": "मैक्स पूलिंग फ़ीचर मैप का आकार कैसे घटाती है?",
+        "mr": "मॅक्स पूलिंग फीचर मॅपचा आकार कसा कमी करते?",
+        "hinglish": "Max pooling feature map ka size kaise kam karti hai?",
+        "mixed": "max pooling feature map को कैसे shrink करती है?"
+      }
+    },
+    {
+      "id": "c11", "topic": "recurrent neural network",
+      "segments": {
+        "en": "A recurrent neural network reads a sequence one step at a time and keeps a hidden state as its memory.",
+        "hi": "रिकरेंट न्यूरल नेटवर्क एक सीक्वेंस को एक-एक कदम में पढ़ता है और अपनी याददाश्त के रूप में हिडन स्टेट रखता है।",
+        "mr": "रिकरंट न्यूरल नेटवर्क एक सीक्वेन्स एकेका पायरीत वाचते आणि स्मरणशक्ती म्हणून हिडन स्टेट ठेवते.",
+        "hinglish": "Recurrent neural network ek sequence ko ek ek step mein padhta hai aur apni memory ke roop mein hidden state rakhta hai."
+      },
+      "queries": {
+        "en": "How does an RNN remember earlier words in a sentence?",
+        "hi": "RNN वाक्य के पिछले शब्दों को कैसे याद रखता है?",
+        "mr": "RNN वाक्यातील आधीचे शब्द कसे लक्षात ठेवते?",
+        "hinglish": "RNN sentence ke pichhle words ko kaise yaad rakhta hai?",
+        "mixed": "RNN में hidden state का क्या role है?"
+      }
+    },
+    {
+      "id": "c12", "topic": "epoch and batch size",
+      "segments": {
+        "en": "One epoch is a full pass over the training data, and the batch size is how many examples we process before each update.",
+        "hi": "एक एपॉक ट्रेनिंग डेटा का एक पूरा चक्कर है, और बैच साइज़ यह है कि हर अपडेट से पहले हम कितने उदाहरण प्रोसेस करते हैं।",
+        "mr": "एक एपॉक म्हणजे ट्रेनिंग डेटावरून एक पूर्ण फेरी, आणि बॅच साइझ म्हणजे प्रत्येक अपडेटपूर्वी आपण किती उदाहरणे प्रोसेस करतो.",
+        "hinglish": "Ek epoch training data ka ek poora chakkar hai, aur batch size ye hai ki har update se pehle hum kitne examples process karte hain."
+      },
+      "queries": {
+        "en": "What is the difference between an epoch and a batch?",
+        "hi": "एपॉक और बैच में क्या अंतर है?",
+        "mr": "एपॉक आणि बॅचमध्ये काय फरक आहे?",
+        "hinglish": "Epoch aur batch mein kya difference hai?",
+        "mixed": "epoch और batch size में क्या difference है?"
+      }
+    },
+    {
+      "id": "c13", "topic": "validation set",
+      "segments": {
+        "en": "We split the data into training and validation sets so we can check performance on examples the model never trained on.",
+        "hi": "हम डेटा को ट्रेनिंग और वैलिडेशन सेट में बाँटते हैं ताकि उन उदाहरणों पर प्रदर्शन जाँच सकें जिन पर मॉडल ने कभी ट्रेनिंग नहीं की।",
+        "mr": "आपण डेटा ट्रेनिंग आणि व्हॅलिडेशन सेटमध्ये विभागतो जेणेकरून मॉडेलने कधीही ट्रेन न केलेल्या उदाहरणांवर कामगिरी तपासता येईल.",
+        "hinglish": "Hum data ko training aur validation set mein baantte hain taaki un examples par performance check kar sakein jin par model ne kabhi train nahi kiya."
+      },
+      "queries": {
+        "en": "Why do we need a validation set?",
+        "hi": "हमें वैलिडेशन सेट की ज़रूरत क्यों होती है?",
+        "mr": "आपल्याला व्हॅलिडेशन सेटची गरज का असते?",
+        "hinglish": "Humein validation set ki zaroorat kyun hoti hai?",
+        "mixed": "validation set क्यों ज़रूरी है?"
+      }
+    },
+    {
+      "id": "c14", "topic": "transfer learning",
+      "segments": {
+        "en": "Transfer learning reuses a network pretrained on a large dataset and fine-tunes it on your smaller task.",
+        "hi": "ट्रांसफर लर्निंग एक बड़े डेटासेट पर पहले से ट्रेन किए नेटवर्क को दोबारा इस्तेमाल करके आपके छोटे काम पर फ़ाइन-ट्यून करती है।",
+        "mr": "ट्रान्सफर लर्निंग मोठ्या डेटासेटवर आधीच ट्रेन केलेले नेटवर्क पुन्हा वापरून तुमच्या लहान कामावर फाइन-ट्यून करते.",
+        "hinglish": "Transfer learning ek bade dataset par pehle se train kiye network ko dobara use karke aapke chhote task par fine-tune karti hai."
+      },
+      "queries": {
+        "en": "Can we reuse a pretrained model for our own problem?",
+        "hi": "क्या हम अपनी समस्या के लिए पहले से ट्रेन किया मॉडल दोबारा इस्तेमाल कर सकते हैं?",
+        "mr": "आपण आपल्या समस्येसाठी आधीच ट्रेन केलेले मॉडेल पुन्हा वापरू शकतो का?",
+        "hinglish": "Kya hum apni problem ke liye pehle se trained model dobara use kar sakte hain?",
+        "mixed": "pretrained model को fine-tune कैसे करते हैं?"
+      }
+    },
+    {
+      "id": "c15", "topic": "Adam optimizer",
+      "segments": {
+        "en": "The Adam optimizer adapts the step size for every weight using running averages of past gradients.",
+        "hi": "एडम ऑप्टिमाइज़र पिछले ग्रेडिएंट्स के रनिंग एवरेज का उपयोग करके हर वेट के लिए कदम का आकार बदलता रहता है।",
+        "mr": "ॲडम ऑप्टिमायझर मागील ग्रेडियंट्सच्या रनिंग सरासरीचा वापर करून प्रत्येक वेटसाठी पावलाचा आकार बदलत राहतो.",
+        "hinglish": "Adam optimizer pichhle gradients ke running averages ka use karke har weight ke liye step size badalta rehta hai."
+      },
+      "queries": {
+        "en": "What is special about the Adam optimizer?",
+        "hi": "एडम ऑप्टिमाइज़र की क्या खासियत है?",
+        "mr": "ॲडम ऑप्टिमायझरची खासियत काय आहे?",
+        "hinglish": "Adam optimizer ki kya khaasiyat hai?",
+        "mixed": "Adam optimizer हर weight का step size कैसे adapt करता है?"
+      }
+    },
+    {
+      "id": "c16", "topic": "input normalization",
+      "segments": {
+        "en": "Before training we normalize the input features so they have similar ranges, which makes learning faster and more stable.",
+        "hi": "ट्रेनिंग से पहले हम इनपुट फ़ीचर्स को नॉर्मलाइज़ करते हैं ताकि उनकी रेंज समान हो, जिससे सीखना तेज़ और स्थिर होता है।",
+        "mr": "ट्रेनिंगपूर्वी आपण इनपुट फीचर्स नॉर्मलाइझ करतो जेणेकरून त्यांची रेंज समान होते, ज्यामुळे शिकणे जलद आणि स्थिर होते.",
+        "hinglish": "Training se pehle hum input features ko normalize karte hain taaki unki range similar ho, jisse learning tez aur stable hoti hai."
+      },
+      "queries": {
+        "en": "Why should input data be normalized?",
+        "hi": "इनपुट डेटा को नॉर्मलाइज़ क्यों करना चाहिए?",
+        "mr": "इनपुट डेटा नॉर्मलाइझ का करावा?",
+        "hinglish": "Input data ko normalize kyun karna chahiye?",
+        "mixed": "input features को normalize करने का फायदा क्या है?"
+      }
+    }
+  ]
+}

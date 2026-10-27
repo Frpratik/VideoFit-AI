@@ -1,0 +1,4 @@
+﻿0:00 namaste dosto aaj hum neural network samjhenge
+0:08 ek neuron inputs ko weights se multiply karta hai
+0:19 phir activation function decide karta hai ki output kya hoga
+0:33 gradient descent loss ko kam karne ka tareeka hai

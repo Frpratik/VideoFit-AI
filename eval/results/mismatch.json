@@ -1,0 +1,125 @@
+{
+ "model": "openai/gpt-oss-20b",
+ "usage": {
+  "calls": 22,
+  "input_tokens": 20981,
+  "output_tokens": 9155
+ },
+ "rows": [
+  {
+   "goal": "Master transformer architectures and attention for research",
+   "level": "advanced",
+   "overall": 28.1,
+   "criteria": {
+    "topic_coverage": 9.4,
+    "depth": 47.5,
+    "examples": 50.0,
+    "level_fit": 0.0,
+    "clarity": 50.0
+   },
+   "topics": [
+    [
+     "Transformer Architecture Fundamentals",
+     "not_detected"
+    ],
+    [
+     "Self-Attention Mechanism",
+     "not_detected"
+    ],
+    [
+     "Multi-Head Attention",
+     "not_detected"
+    ],
+    [
+     "Positional Encoding",
+     "not_detected"
+    ],
+    [
+     "Encoder-Decoder Architecture",
+     "not_detected"
+    ],
+    [
+     "Training Objectives",
+     "partial"
+    ],
+    [
+     "Optimization Tricks",
+     "partial"
+    ],
+    [
+     "Transformer Variants",
+     "not_detected"
+    ],
+    [
+     "Attention Visualization",
+     "not_detected"
+    ],
+    [
+     "Efficient Attention Mechanisms",
+     "not_detected"
+    ]
+   ],
+   "limitations": [
+    "No coverage of transformer architecture or attention mechanisms.",
+    "Content is too elementary for an advanced learner; lacks mathematical depth.",
+    "Missing discussion of training tricks, optimization, or advanced loss functions.",
+    "No mention of modern deep learning frameworks or best practices beyond basic SGD."
+   ]
+  },
+  {
+   "goal": "Learn deep learning from beginner to intermediate",
+   "level": "intermediate",
+   "overall": 57.2,
+   "criteria": {
+    "topic_coverage": 46.2,
+    "depth": 70.0,
+    "examples": 75.0,
+    "level_fit": 25.0,
+    "clarity": 75.0
+   },
+   "topics": [
+    [
+     "Neural Network Fundamentals",
+     "covered"
+    ],
+    [
+     "Backpropagation & Gradient Descent",
+     "covered"
+    ],
+    [
+     "Loss Functions & Optimization",
+     "partial"
+    ],
+    [
+     "Regularization Techniques",
+     "not_detected"
+    ],
+    [
+     "Convolutional Neural Networks",
+     "not_detected"
+    ],
+    [
+     "Recurrent & Sequence Models",
+     "not_detected"
+    ],
+    [
+     "Transfer Learning & Fine-tuning",
+     "not_detected"
+    ],
+    [
+     "Model Evaluation & Hyperparameter Tuning",
+     "partial"
+    ]
+   ],
+   "limitations": [
+    "No discussion of regularization techniques (dropout, weight decay).",
+    "No coverage of convolutional or recurrent architectures, which are essential for many applications.",
+    "Minimal mathematical detail; backpropagation is only described conceptually.",
+    "No mention of advanced optimizers (Adam, RMSProp) or learning rate schedules.",
+    "Limited coverage of hyperparameter tuning beyond learning rate and epochs.",
+    "No exploration of model evaluation metrics beyond loss curves.",
+    "No discussion of data preprocessing or feature engineering."
+   ]
+  }
+ ]
+}

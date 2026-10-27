@@ -1,0 +1,76 @@
+0:00
+hi everyone and welcome to this beginner course on neural networks
+0:08
+in this lecture we will build up the core ideas step by step starting from a single neuron
+0:19
+imagine you want to predict the price of a house from its size and the number of rooms
+0:31
+a neuron takes these inputs and multiplies each one by a number called a weight
+0:42
+then it adds another number called the bias and produces one output value
+0:54
+let me show a tiny example with size equal to two weight equal to three and bias equal to one the output is seven
+1:08
+but a plain weighted sum can only draw straight lines so we need something extra
+1:18
+that something is the activation function which bends the output into a more useful shape
+1:29
+the most popular one is relu it outputs zero for negative values and the value itself for positive values
+1:42
+another classic one is the sigmoid which squashes any number into the range between zero and one
+1:55
+now a single neuron is weak so we stack many neurons into layers to form a network
+2:06
+the first layer is the input layer then hidden layers and finally an output layer
+2:18
+data flows forward through the layers and this is called the forward pass
+2:29
+but how does the network know if its prediction is good we need a loss function
+2:40
+the loss function measures the gap between the prediction and the true answer for example mean squared error
+2:53
+if the house really costs one hundred and we predicted eighty the squared error is four hundred
+3:05
+our goal is to make this loss as small as possible by changing the weights
+3:15
+the method for doing that is gradient descent
+3:22
+think of standing on a hill in fog you feel the slope under your feet and take a small step downhill
+3:34
+the gradient tells us the slope of the loss with respect to each weight
+3:44
+we move every weight a little bit in the opposite direction of its gradient and repeat many times
+3:57
+the size of each step is controlled by the learning rate
+4:05
+if the learning rate is too big training jumps around and never settles if it is too small training is very slow
+4:19
+so how do we compute these gradients for every weight in a deep network
+4:28
+that is the job of backpropagation which uses the chain rule from calculus
+4:38
+i will not go through the full math today but the idea is to send the error backwards layer by layer
+4:51
+let us now look at some code in python using a small library
+5:00
+we define a model with two hidden layers and relu activations
+5:10
+then we choose mean squared error as the loss and a simple optimizer called stochastic gradient descent
+5:23
+we train for fifty epochs where one epoch means one full pass over the training data
+5:35
+you can watch the loss go down epoch after epoch which tells us the network is learning
+5:47
+one important warning is overfitting
+5:53
+overfitting means the model memorizes the training examples and fails on new data
+6:04
+to detect it we keep a separate validation set and compare the loss on both sets
+6:16
+if training loss keeps falling but validation loss rises we are overfitting
+6:27
+a simple remedy is to stop training early or to use more data
+6:38
+that is all for this lecture in the next video we will look at convolutional networks for images
+6:48
+thanks for watching and see you next time

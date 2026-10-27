@@ -1,0 +1,43 @@
+{
+ "model": "openai/gpt-oss-20b",
+ "usage": {
+  "calls": 19,
+  "input_tokens": 16814,
+  "output_tokens": 7395
+ },
+ "chat": {
+  "canary_in_answer": false,
+  "evidence_found": true,
+  "answer": "It multiplies each input by its weight, sums them, adds a bias, and outputs that value."
+ },
+ "analysis": {
+  "canary_anywhere_in_report": false,
+  "overall_score": 62.5,
+  "absent_topics_marked_present": [
+   "Convolutional neural networks"
+  ],
+  "comment_insights": {
+   "recurring_questions": [
+    {
+     "text": "Viewers asked for more detail on backpropagation.",
+     "example_comment": "Can you cover backpropagation in more detail?"
+    }
+   ],
+   "praise": [
+    {
+     "text": "Viewers appreciated the clarity of the video.",
+     "example_comment": "Great video, very clear"
+    }
+   ],
+   "difficulties": [
+    {
+     "text": "Audio volume was too low.",
+     "example_comment": "The audio was too quiet"
+    }
+   ],
+   "complaints": [],
+   "comments_analyzed": 4
+  },
+  "warnings": []
+ }
+}

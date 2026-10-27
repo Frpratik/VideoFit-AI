@@ -1,0 +1,46 @@
+{
+ "model": "openai/gpt-oss-20b",
+ "results": [
+  {
+   "q": "What is gradient descent?",
+   "understood_as": "What is gradient descent?",
+   "kind": "transcript",
+   "answer_language": "English",
+   "evidence_found": true,
+   "citation_in_window": true,
+   "integrity": true,
+   "script_ok": null,
+   "warnings": [],
+   "answer": "Gradient descent is the method for minimizing the loss. Think of standing on a hill in fog: you feel the slope under your feet and take a small step downhill. The gradient tells us the slope of the loss with respect to each weight. We move every weight a little bit in the opposite direction of its gradient and repeat many times. The size of each step is controlled by the learning rate; if the learning rate is too big training jumps around and never settles, and if it is too small training is very slow."
+  },
+  {
+   "q": "How does the learning rate affect it?",
+   "understood_as": "How does the learning rate affect gradient descent?",
+   "kind": "transcript",
+   "answer_language": "English",
+   "evidence_found": true,
+   "citation_in_window": true,
+   "integrity": true,
+   "script_ok": null,
+   "warnings": [],
+   "answer": "The learning rate controls the size of each step in gradient descent. If it is too large, training jumps around and never settles; if it is too small, training is very slow."
+  },
+  {
+   "q": "Explain that in simple Hindi",
+   "understood_as": "Explain the concept of gradient descent and how the learning rate affects it in simple Hindi.",
+   "kind": "transcript",
+   "answer_language": "Hindi",
+   "evidence_found": true,
+   "citation_in_window": true,
+   "integrity": true,
+   "script_ok": true,
+   "warnings": [],
+   "answer": "ग्रेडिएंट डिसेंट वह विधि है जिससे हम लॉस को न्यूनतम करते हैं। इसे ऐसे समझें कि आप धुंध में पहाड़ पर खड़े हैं, आपको अपने पैरों के नीचे ढलान महसूस होती है और आप नीचे की ओर एक छोटा कदम बढ़ाते हैं। ग्रेडिएंट हमें बताता है कि प्रत्येक वज़न के सापेक्ष लॉस का ढलान कितना है। हम हर वज़न को उसके ग्रेडिएंट के विपरीत दिशा में थोड़ा-थोड़ा समायोजित करते हैं और यह प्रक्रिया कई बार दोहराते हैं। प्रत्येक कदम का आकार लर्निंग रेट द्वारा नियंत्रित होता है। यदि लर्निंग रेट बहुत बड़ा हो तो प्रशिक्षण उछलता रहता है और कभी स्थिर नहीं होता; यदि यह बहुत छोटा हो तो प्रशिक्षण बहुत धीमा हो जाता है।"
+  }
+ ],
+ "usage": {
+  "calls": 12,
+  "input_tokens": 8271,
+  "output_tokens": 2972
+ }
+}

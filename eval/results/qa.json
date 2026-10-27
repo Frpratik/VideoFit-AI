@@ -1,0 +1,245 @@
+{
+ "summary": {
+  "answerable_questions": 13,
+  "errors": 0,
+  "retrieval_top1_chunk_has_gold": 0.6923076923076923,
+  "retrieval_top4_chunk_has_gold": 1.0,
+  "answered_with_evidence": 1.0,
+  "some_citation_inside_gold_window": 1.0,
+  "citation_integrity_all_answers": true,
+  "language_script_ok": [
+   true,
+   true,
+   true
+  ],
+  "unanswerable_refused": 5,
+  "unanswerable_total": 5,
+  "unanswerable_with_citations": 0,
+  "followups_grounded": [
+   false,
+   false,
+   false
+  ]
+ },
+ "results": {
+  "answerable": [
+   {
+    "id": "q01",
+    "language": "English",
+    "retrieval_hit_rank": 2,
+    "evidence_found": true,
+    "citations": 3,
+    "citation_in_window": true,
+    "integrity": true,
+    "attempts": 1,
+    "script_ok": null,
+    "answer": "A neuron multiplies each input by a weight, adds them together, then adds a bias to produce a single output value. For example, with an input size of two, weight of three, and bias of one, the output is seven."
+   },
+   {
+    "id": "q02",
+    "language": "English",
+    "retrieval_hit_rank": 1,
+    "evidence_found": true,
+    "citations": 1,
+    "citation_in_window": true,
+    "integrity": true,
+    "attempts": 1,
+    "script_ok": null,
+    "answer": "The ReLU activation function outputs zero for negative values and outputs the input value itself for positive values."
+   },
+   {
+    "id": "q03",
+    "language": "English",
+    "retrieval_hit_rank": 2,
+    "evidence_found": true,
+    "citations": 2,
+    "citation_in_window": true,
+    "integrity": true,
+    "attempts": 1,
+    "script_ok": null,
+    "answer": "The loss function measures the gap between the prediction and the true answer, for example using mean squared error. In a numeric example, if the house really costs 100 and we predicted 80, the squared error is (100 − 80)² = 400."
+   },
+   {
+    "id": "q04",
+    "language": "English",
+    "retrieval_hit_rank": 1,
+    "evidence_found": true,
+    "citations": 1,
+    "citation_in_window": true,
+    "integrity": true,
+    "attempts": 1,
+    "script_ok": null,
+    "answer": "The video compares gradient descent to standing on a hill in fog: you can’t see the whole landscape, but you can feel the slope under your feet and then take a small step downhill."
+   },
+   {
+    "id": "q05",
+    "language": "English",
+    "retrieval_hit_rank": 1,
+    "evidence_found": true,
+    "citations": 1,
+    "citation_in_window": true,
+    "integrity": true,
+    "attempts": 1,
+    "script_ok": null,
+    "answer": "If the learning rate is too big, training jumps around and never settles."
+   },
+   {
+    "id": "q06",
+    "language": "English",
+    "retrieval_hit_rank": 1,
+    "evidence_found": true,
+    "citations": 1,
+    "citation_in_window": true,
+    "integrity": true,
+    "attempts": 1,
+    "script_ok": null,
+    "answer": "One epoch means one full pass over the training data."
+   },
+   {
+    "id": "q07",
+    "language": "English",
+    "retrieval_hit_rank": 1,
+    "evidence_found": true,
+    "citations": 2,
+    "citation_in_window": true,
+    "integrity": true,
+    "attempts": 1,
+    "script_ok": null,
+    "answer": "You detect overfitting by keeping a separate validation set and comparing the loss on both sets. If the training loss keeps falling while the validation loss rises, you are overfitting."
+   },
+   {
+    "id": "q08",
+    "language": "English",
+    "retrieval_hit_rank": 1,
+    "evidence_found": true,
+    "citations": 1,
+    "citation_in_window": true,
+    "integrity": true,
+    "attempts": 1,
+    "script_ok": null,
+    "answer": "a simple remedy is to stop training early or to use more data"
+   },
+   {
+    "id": "q09",
+    "language": "English",
+    "retrieval_hit_rank": 1,
+    "evidence_found": true,
+    "citations": 1,
+    "citation_in_window": true,
+    "integrity": true,
+    "attempts": 1,
+    "script_ok": null,
+    "answer": "The sigmoid is a classic activation function that squashes any number into the range between zero and one."
+   },
+   {
+    "id": "q10",
+    "language": "English",
+    "retrieval_hit_rank": 1,
+    "evidence_found": true,
+    "citations": 1,
+    "citation_in_window": true,
+    "integrity": true,
+    "attempts": 1,
+    "script_ok": null,
+    "answer": "Data flows forward through the layers, and this is called the forward pass."
+   },
+   {
+    "id": "q11",
+    "language": "Hindi",
+    "retrieval_hit_rank": 2,
+    "evidence_found": true,
+    "citations": 2,
+    "citation_in_window": true,
+    "integrity": true,
+    "attempts": 1,
+    "script_ok": true,
+    "answer": "एक न्यूरॉन इनपुट्स को उनके संबंधित वज़न (weights) से गुणा करता है, फिर सभी परिणामों को जोड़ता है, उसके बाद एक बायस (bias) जोड़ता है और एक आउटपुट मान उत्पन्न करता है।"
+   },
+   {
+    "id": "q12",
+    "language": "Marathi",
+    "retrieval_hit_rank": 1,
+    "evidence_found": true,
+    "citations": 1,
+    "citation_in_window": true,
+    "integrity": true,
+    "attempts": 1,
+    "script_ok": true,
+    "answer": "overfitting म्हणजे मॉडेल प्रशिक्षण उदाहरणे लक्षात ठेवते आणि नवीन डेटावर अपयशी ठरते."
+   },
+   {
+    "id": "q13",
+    "language": "Hinglish",
+    "retrieval_hit_rank": 2,
+    "evidence_found": true,
+    "citations": 5,
+    "citation_in_window": true,
+    "integrity": true,
+    "attempts": 1,
+    "script_ok": true,
+    "answer": "Gradient descent ek method hai jisme hum loss ka gradient nikalte hain (jo har weight ke respect me loss ka slope batata hai) aur phir har weight ko uske opposite direction me chhota step lete hain, jaise fog me hill par khade ho kar slope feel karke neeche ki taraf chhota kadam lete hain, aur ye process baar baar repeat karte hain. Har step ka size learning rate se control hota hai."
+   }
+  ],
+  "unanswerable": [
+   {
+    "id": "u01",
+    "evidence_found": false,
+    "citations": 0,
+    "answer": "The supplied transcript does not cover the transformer attention mechanism."
+   },
+   {
+    "id": "u02",
+    "evidence_found": false,
+    "citations": 0,
+    "answer": "The supplied transcript does not contain enough information to answer this."
+   },
+   {
+    "id": "u03",
+    "evidence_found": false,
+    "citations": 0,
+    "answer": "The supplied transcript does not contain enough information to answer this."
+   },
+   {
+    "id": "u04",
+    "evidence_found": false,
+    "citations": 0,
+    "answer": "Sorry, the language model failed to answer. Please try again."
+   },
+   {
+    "id": "u05",
+    "evidence_found": false,
+    "citations": 0,
+    "answer": "This question does not seem to be about this video, so I cannot answer it from the transcript."
+   }
+  ],
+  "followups": [
+   {
+    "q": "What is gradient descent?",
+    "understood_as": "What is gradient descent?",
+    "kind": "transcript",
+    "evidence_found": false,
+    "citation_in_window": false,
+    "script_ok": null,
+    "answer": "Sorry, the language model failed to answer. Please try again."
+   },
+   {
+    "q": "How does the learning rate affect it?",
+    "understood_as": "How does the learning rate affect it?",
+    "kind": "transcript",
+    "evidence_found": false,
+    "citation_in_window": false,
+    "script_ok": null,
+    "answer": "Sorry, the language model failed to answer. Please try again."
+   },
+   {
+    "q": "Explain that in simple Hindi",
+    "understood_as": "Explain that in simple Hindi",
+    "kind": "transcript",
+    "evidence_found": false,
+    "citation_in_window": false,
+    "script_ok": false,
+    "answer": "Sorry, the language model failed to answer. Please try again."
+   }
+  ]
+ }
+}

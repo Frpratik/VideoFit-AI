@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VideoFit AI</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1' y='6' width='30' height='20' rx='6' fill='%23f00'/%3E%3Cpath d='M13 11l8 5-8 5z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="/" aria-label="VideoFit AI home">
+    <svg width="32" height="22" viewBox="0 0 32 22" aria-hidden="true"><rect width="32" height="22" rx="6" fill="#f00"/><path d="M13 5.5l9 5.5-9 5.5z" fill="#fff"/></svg>
+    <span>VideoFit<em>AI</em></span>
+  </a>
+  <nav class="tabs" aria-label="Sections">
+    <button class="tab active" data-view="load">Load video</button>
+    <button class="tab" data-view="dash" disabled>Analytics</button>
+    <button class="tab" data-view="chat" disabled>Chat</button>
+  </nav>
+  <div class="health" id="health" title="Backend status"></div>
+</header>
+
+<main>
+  <!-- ============ LOAD ============ -->
+  <section id="view-load" class="view">
+    <div class="load-grid">
+      <form id="load-form" class="panel" autocomplete="off" novalidate>
+        <h1>Is this video right for you?</h1>
+        <p class="lead">Paste a YouTube link and its transcript. VideoFit scores how well the video fits your learning goal, and lets you ask it questions with clickable timestamps.</p>
+
+        <label for="url">YouTube URL</label>
+        <input id="url" type="url" placeholder="https://www.youtube.com/watch?v=...">
+
+        <label for="goal">What do you want to learn?</label>
+        <input id="goal" type="text" maxlength="500" placeholder="e.g. Learn deep learning from beginner to intermediate">
+
+        <div class="row">
+          <div>
+            <label for="level">Your current level</label>
+            <select id="level">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+          <div>
+            <label for="language">Answer language</label>
+            <select id="language">
+              <option>English</option><option>Hindi</option><option>Marathi</option><option>Hinglish</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="label-row">
+          <label for="transcript">Transcript</label>
+          <button type="button" class="link" id="demo-btn">Use demo transcript</button>
+        </div>
+        <textarea id="transcript" rows="9" class="mono" spellcheck="false"
+          placeholder="Paste the transcript here. Timestamped text, SRT and VTT are supported. Hindi, Marathi and Hinglish work too."></textarea>
+        <p class="hint" id="demo-note" hidden></p>
+
+        <details>
+          <summary>Topic checklist <span class="muted">(optional)</span></summary>
+          <p class="hint">One topic per line. Leave empty to let the model build a checklist from your goal. Writing your own makes repeated scores comparable.</p>
+          <textarea id="topics" rows="4" placeholder="Gradient descent&#10;Backpropagation&#10;Overfitting"></textarea>
+        </details>
+
+        <details>
+          <summary>Audience comments <span class="muted">(optional)</span></summary>
+          <p class="hint">One comment per line. They are summarized separately and never change the score.</p>
+          <textarea id="comments" rows="4" placeholder="Paste comments here, one per line"></textarea>
+        </details>
+
+        <div class="actions">
+          <button type="submit" class="btn primary" id="analyze-btn">Analyze video</button>
+          <button type="button" class="btn" id="chat-only-btn">Load for chat only</button>
+        </div>
+        <div id="load-status" class="status" role="status" aria-live="polite"></div>
+      </form>
+
+      <aside class="panel howto">
+        <h2>Get the transcript from YouTube</h2>
+        <ol>
+          <li>Open the video on a computer.</li>
+          <li>Under the video, click <b>…more</b> in the description, then <b>Show transcript</b>.</li>
+          <li>In the transcript panel, open the <b>⋮</b> menu and make sure <b>Toggle timestamps</b> is on.</li>
+          <li>Select all the transcript lines, copy them, and paste them here.</li>
+        </ol>
+        <p class="hint">Timestamps are what make the video links work. Without them you can still chat, but answers cannot link to a time.</p>
+        <div class="reel-mini" aria-hidden="true"></div>
+        <h3>Good to know</h3>
+        <ul class="plain">
+          <li>The score is a heuristic, not a verdict.</li>
+          <li>"Not detected" means not found in <i>your pasted text</i>.</li>
+          <li>Your transcript and comments are sent to the Groq API to produce results. Nothing else leaves your computer.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ DASHBOARD ============ -->
+  <section id="view-dash" class="view" hidden>
+    <div id="dash-empty" class="empty">
+      <div class="clap" aria-hidden="true"></div>
+      <h2>No analysis yet</h2>
+      <p>Load a video and run <b>Analyze video</b> to see its learning-fit report.</p>
+    </div>
+    <div id="dash" hidden></div>
+  </section>
+
+  <!-- ============ CHAT ============ -->
+  <section id="view-chat" class="view" hidden>
+    <div class="chat-grid">
+      <div class="stage">
+        <div class="player" id="player"><div class="player-empty"><svg width="64" height="44" viewBox="0 0 32 22"><rect width="32" height="22" rx="6" fill="#f00"/><path d="M13 5.5l9 5.5-9 5.5z" fill="#fff"/></svg><span>Click a timestamp in an answer to jump here</span></div></div>
+        <p class="hint" id="player-note">If the embedded player is blocked for a video, use the ↗ link beside each timestamp to open YouTube.</p>
+      </div>
+      <div class="chatbox panel">
+        <div class="chat-head">
+          <h2>Chat with the video</h2>
+          <div class="chat-tools">
+            <select id="chat-language" aria-label="Answer language">
+              <option>English</option><option>Hindi</option><option>Marathi</option><option>Hinglish</option>
+            </select>
+            <button class="btn small" id="reset-btn" type="button">New chat</button>
+          </div>
+        </div>
+        <div id="thread" class="thread" aria-live="polite"></div>
+        <div id="suggest" class="suggest"></div>
+        <form id="chat-form" class="composer" autocomplete="off">
+          <input id="question" type="text" maxlength="1000" placeholder="Ask anything about this video…" aria-label="Your question">
+          <button class="btn primary" type="submit" id="send-btn">Ask</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="toast" class="toast" role="alert" hidden></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
