@@ -140,9 +140,13 @@ def answer_question(
     try:
         result = llm_call(SYSTEM_PROMPT.format(language=language), user)
     except Exception as exc:  # network, rate limit, schema failure
+        limited = type(exc).__name__ == "RateLimitError"
         return ChatAnswer(
             evidence_found=False,
-            answer_from_transcript="Sorry, the language model failed to answer. Please try again.",
+            answer_from_transcript=(
+                "The model's rate limit was reached (the free tier limits tokens per minute and per day). "
+                "Please wait a little and try again." if limited
+                else "Sorry, the language model failed to answer. Please try again."),
             warnings=[f"LLM error: {type(exc).__name__}"],  # type only, so no transcript text reaches logs
         )
 

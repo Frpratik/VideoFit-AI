@@ -141,10 +141,15 @@ citations, and Hindi or Marathi answers by a native speaker.
 
 - **Heuristic score.** The 40/25/15/10/10 weights are a starting point, not a validated measure. "Not detected" means
   not found in the pasted text, not proof the video never covers it.
-- **Free tier budget.** One analysis uses roughly 16,500 tokens. Groq's free tier allows 200,000 tokens per day per
-  model, so about a dozen analyses a day plus some chat.
+- **Free tier budget.** Each topic costs about 1,400 tokens, so the default 8-topic analysis is roughly 12,000 tokens
+  (a 4-topic run measured 8,000). The cost depends on the number of topics, not on transcript length. Groq's free
+  tier allows 200,000 tokens per day per model. The dashboard shows the model calls and tokens each run used.
+- **Saved judgements.** A topic is reused without any model call when the transcript, video, topic wording, language,
+  model and prompt are all unchanged (stored in `chroma_db/assessment_cache.json`). Re-running with
+  **Reuse this checklist** measured 1 model call and about 1,500 tokens instead of 6 calls and about 8,000 tokens.
 - **Auto-generated topic lists vary** between runs, so the score moves a few points. Use **Reuse this checklist** or
-  type your own topics for comparable scores.
+  type your own topics for comparable scores. Typed topics are names only; **Reuse** keeps each topic's description
+  and core/supporting weight, so only it gives an exact repeat.
 - **Memory only.** Reports and chat history are lost when the server restarts. Only the vector index is saved.
 - **Transcripts are sent to the Groq API.** Nothing else leaves your computer.
 - **Embedded player.** The in-page YouTube player could not be verified in the test environment; every citation also has

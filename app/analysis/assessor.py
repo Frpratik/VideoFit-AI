@@ -3,13 +3,16 @@
 The LLM judges; Python validates evidence and does all the arithmetic.
 """
 
-from typing import Callable, Optional
+from typing import Callable, Optional, Union
 
 from langchain_core.embeddings import Embeddings
 from pydantic import BaseModel
 
-from app import llm
+import hashlib
+
+from app import config, llm
 from app.analysis import rubric
+from app.analysis.cache import AssessmentCache
 from app.chat.answerer import build_citations, format_context
 from app.ingestion.transcript import format_timestamp
 from app.rag.store import search
@@ -18,7 +21,8 @@ from app.schemas import (
     TopicChecklist, TopicResult,
 )
 
-MAX_TOPICS = 12
+MAX_TOPICS = 12      # hard ceiling
+DEFAULT_TOPICS = 8   # each topic costs about 1,400 tokens, so the default keeps one analysis near 12,000
 SAMPLE_CHARS = 6000
 LlmCall = Callable[[type[BaseModel], str, str], BaseModel]
 
@@ -33,8 +37,8 @@ CAVEATS = [
 ]
 
 CHECKLIST_SYSTEM = (
-    "You are a curriculum designer. Given a learner's goal and level, list 6 to 10 specific topics a "
-    "good video must cover to serve that learner. Mark each topic importance 'core' (essential) or "
+    "You are a curriculum designer. Given a learner's goal and level, list up to {n} specific topics a "
+    "good video must cover to serve that learner (fewer if the goal is narrow). Mark each topic importance 'core' (essential) or "
     "'supporting' (useful). Use short English topic names and a one-line description. " + SAFETY
 )
 ASSESS_SYSTEM = (
@@ -55,6 +59,10 @@ HOLISTIC_SYSTEM = (
 )
 
 
+# Changes whenever the assessment instructions change, so old cached judgements are never reused for new prompts.
+PROMPT_VERSION = hashlib.sha1(ASSESS_SYSTEM.encode("utf-8")).hexdigest()[:8]
+
+
 class AnalysisError(RuntimeError):
     """Raised when the analysis cannot produce a meaningful report."""
 
@@ -72,18 +80,41 @@ def sample_transcript(segments: list[Segment], max_chars: int = SAMPLE_CHARS) ->
     return "\n".join(picked), True
 
 
-def make_checklist(goal: str, level: Level, call: LlmCall) -> list[Topic]:
-    result = call(TopicChecklist, CHECKLIST_SYSTEM, f"<goal>{goal}</goal>\nLearner level: {level}")
-    topics = [t for t in result.topics if t.name.strip()][:MAX_TOPICS]
+def normalize_topics(topics: list[Union[str, Topic]]) -> list[Topic]:
+    """Plain strings become core topics. Full Topic objects keep their description and importance."""
+    out = [Topic(name=t.strip()) if isinstance(t, str) else t for t in topics]
+    return [t for t in out if t.name.strip()][:MAX_TOPICS]
+
+
+def make_checklist(goal: str, level: Level, call: LlmCall, max_topics: int = DEFAULT_TOPICS) -> list[Topic]:
+    n = max(1, min(max_topics, MAX_TOPICS))
+    result = call(TopicChecklist, CHECKLIST_SYSTEM.format(n=n), f"<goal>{goal}</goal>\nLearner level: {level}")
+    topics = [t for t in result.topics if t.name.strip()][:n]
     if not topics:
         raise AnalysisError("Could not build a topic checklist for this goal.")
     return topics
 
 
 def assess_topic(
-    topic: Topic, video_id: str, embeddings: Embeddings, language: str, call: LlmCall, k: int = 4
+    topic: Topic, video_id: str, embeddings: Embeddings, language: str, call: LlmCall, k: int = 4,
+    cache: Optional[AssessmentCache] = None, text_hash: str = "",
 ) -> TopicResult:
-    """Retrieve evidence for one topic, ask the LLM, then validate its claims."""
+    """Retrieve evidence for one topic, ask the LLM, then validate its claims. Reuses a cached result if one exists."""
+    cache_key = None
+    if cache is not None and text_hash:
+        cache_key = cache.key(PROMPT_VERSION + f"k{k}", config.LLM_MODEL, video_id, text_hash, language, topic)
+        hit = cache.get(cache_key, topic)
+        if hit is not None:
+            return hit
+    result = _assess_uncached(topic, video_id, embeddings, language, call, k)
+    if cache_key:
+        cache.put(cache_key, result)
+    return result
+
+
+def _assess_uncached(
+    topic: Topic, video_id: str, embeddings: Embeddings, language: str, call: LlmCall, k: int
+) -> TopicResult:
     retrieved = search(video_id, f"{topic.name}. {topic.description}", embeddings, k=k)
     user = f"<transcript_excerpts>\n{format_context(retrieved)}\n</transcript_excerpts>\n\nTopic: {topic.name} - {topic.description}"
     try:
@@ -121,14 +152,15 @@ def analyze_video(
     level: Level,
     embeddings: Embeddings,
     language: str = "English",
-    topics: Optional[list[str]] = None,
+    topics: Optional[list[Union[str, Topic]]] = None,
     call: LlmCall = llm.call_structured,
+    max_topics: int = DEFAULT_TOPICS,
 ) -> SuitabilityReport:
     """Run the full analysis. The vector index for video_id must already be built."""
     if not goal.strip():
         raise AnalysisError("Please describe your learning goal.")
 
-    checklist = [Topic(name=t.strip()) for t in topics if t.strip()] if topics else make_checklist(goal, level, call)
+    checklist = normalize_topics(topics) if topics else make_checklist(goal, level, call, max_topics)
     if not checklist:
         raise AnalysisError("The topic list is empty.")
 

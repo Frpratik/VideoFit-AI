@@ -15,15 +15,16 @@ from fastapi.staticfiles import StaticFiles
 from langchain_core.messages import BaseMessage, HumanMessage
 from pydantic import BaseModel, Field
 
-from app import config
-from app.analysis.assessor import AnalysisError
+from app import config, llm
+from app.analysis.assessor import DEFAULT_TOPICS, AnalysisError
+from app.analysis.cache import AssessmentCache
 from app.chat.answerer import LANGUAGES
 from app.graph.analysis_graph import build_analysis_graph, run_analysis
 from app.graph.chat_graph import ChatDeps, build_chat_graph
 from app.ingestion.transcript import TranscriptError, parse_transcript
 from app.ingestion.youtube import InvalidYouTubeURL, extract_video_id
 from app.rag.store import E5Embeddings, build_index
-from app.schemas import Level, Segment, SuitabilityReport
+from app.schemas import Level, Segment, SuitabilityReport, Topic
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 UI_DIR = ROOT / "ui"
@@ -45,8 +46,19 @@ def get_embeddings():
     return _embeddings
 
 
+_cache = None
+
+
+def get_cache() -> AssessmentCache:
+    """One shared assessment cache, stored as a JSON file beside the vector index."""
+    global _cache
+    if _cache is None:
+        _cache = AssessmentCache(Path(config.CHROMA_DIR) / "assessment_cache.json")
+    return _cache
+
+
 def make_analysis_graph():
-    return build_analysis_graph(get_embeddings())
+    return build_analysis_graph(get_embeddings(), cache=get_cache())
 
 
 def make_chat_graph():
@@ -85,6 +97,8 @@ class AnalyzeRequest(BaseModel):
     level: Level = "beginner"
     language: str = "English"
     topics: list[str] = Field(default_factory=list, max_length=12)
+    topic_specs: list[Topic] = Field(default_factory=list, max_length=12)  # full topics (name, description, importance); beats `topics`
+    max_topics: int = Field(default=DEFAULT_TOPICS, ge=3, le=12)  # how many topics to auto-generate
     comments: str = Field(default="", max_length=60_000)
 
 
@@ -96,6 +110,14 @@ class ChatRequest(BaseModel):
 
 class ResetRequest(BaseModel):
     session_id: str
+
+
+def usage_since(before: dict) -> dict:
+    """Model calls and tokens used since `before`. The counter is process-wide, which is accurate for one local user."""
+    now = llm.USAGE
+    return {"calls": now["calls"] - before["calls"],
+            "input_tokens": now["input_tokens"] - before["input_tokens"],
+            "output_tokens": now["output_tokens"] - before["output_tokens"]}
 
 
 def check_language(language: str) -> str:
@@ -150,21 +172,24 @@ def load_video(req: VideoRequest) -> dict:
 def analyze(req: AnalyzeRequest) -> dict:
     session = get_session(req.session_id)
     check_language(req.language)
+    before = dict(llm.USAGE)
     try:
         report = run_analysis(make_analysis_graph(), session.video_id, session.segments, req.goal, req.level,
-                              req.language, req.topics or None, req.comments or None)
+                              req.language, req.topic_specs or req.topics or None, req.comments or None, req.max_topics)
     except AnalysisError as exc:
         raise HTTPException(422, str(exc))
     except Exception as exc:
         raise HTTPException(502, f"The analysis failed ({type(exc).__name__}). Please try again.")
     session.report = report
-    return {"report": report.model_dump(), "video_id": session.video_id, "duration_sec": session.duration_sec}
+    return {"report": report.model_dump(), "video_id": session.video_id, "duration_sec": session.duration_sec,
+            "usage": usage_since(before)}
 
 
 @app.post("/api/chat")
 def chat(req: ChatRequest) -> dict:
     session = get_session(req.session_id)
     check_language(req.language)
+    before = dict(llm.USAGE)
     try:
         final = make_chat_graph().invoke({
             "video_id": session.video_id, "language": req.language, "report": session.report,
@@ -174,7 +199,8 @@ def chat(req: ChatRequest) -> dict:
         raise HTTPException(502, f"The chat failed ({type(exc).__name__}). Please try again.")
     session.messages = final["messages"][-MAX_HISTORY_MESSAGES:]
     return {"answer": final["answer"].model_dump(), "understood_as": final.get("standalone_question", ""),
-            "kind": final.get("kind", ""), "answer_language": final.get("answer_language", req.language)}
+            "kind": final.get("kind", ""), "answer_language": final.get("answer_language", req.language),
+            "usage": usage_since(before)}
 
 
 @app.post("/api/chat/reset")

@@ -10,7 +10,7 @@
 The node bodies reuse the tested helpers in app.analysis; this module only adds state and routing.
 """
 
-from typing import Callable, Optional, TypedDict
+from typing import Callable, Optional, TypedDict, Union
 
 from langchain_core.embeddings import Embeddings
 from langgraph.graph import END, START, StateGraph
@@ -20,8 +20,9 @@ from app import llm
 from app.analysis import rubric
 from app.analysis.comments import CommentError, analyze_comments
 from app.analysis.assessor import (
-    CAVEATS, AnalysisError, assess_topic, holistic_review, make_checklist,
+    CAVEATS, DEFAULT_TOPICS, AnalysisError, assess_topic, holistic_review, make_checklist, normalize_topics,
 )
+from app.analysis.cache import AssessmentCache, transcript_hash
 from app.schemas import HolisticAssessment, Level, Segment, SuitabilityReport, Topic, TopicResult
 
 LlmCall = Callable[[type[BaseModel], str, str], BaseModel]
@@ -35,7 +36,9 @@ class AnalysisState(TypedDict, total=False):
     goal: str
     level: Level
     language: str
-    custom_topics: Optional[list[str]]
+    custom_topics: Optional[list[Union[str, Topic]]]
+    max_topics: int
+    text_hash: str  # fingerprint of the transcript, used by the assessment cache
     # working data
     topics: list[Topic]
     results: list[TopicResult]
@@ -48,23 +51,25 @@ class AnalysisState(TypedDict, total=False):
     error: Optional[str]
 
 
-def build_analysis_graph(embeddings: Embeddings, call: LlmCall = llm.call_structured):
+def build_analysis_graph(embeddings: Embeddings, call: LlmCall = llm.call_structured,
+                         cache: Optional[AssessmentCache] = None):
     def checklist_node(state: AnalysisState) -> dict:
         """Use the learner's own topics, or ask the LLM for a checklist."""
         attempt = state.get("attempt", 0) + 1
         if not state["goal"].strip():
             return {"error": "Please describe your learning goal.", "attempt": MAX_CHECKLIST_TRIES}
         if state.get("custom_topics"):
-            return {"topics": [Topic(name=t.strip()) for t in state["custom_topics"] if t.strip()],
-                    "error": None, "attempt": attempt}
+            return {"topics": normalize_topics(state["custom_topics"]), "error": None, "attempt": attempt}
         try:
-            return {"topics": make_checklist(state["goal"], state["level"], call), "error": None, "attempt": attempt}
+            topics = make_checklist(state["goal"], state["level"], call, state.get("max_topics", DEFAULT_TOPICS))
+            return {"topics": topics, "error": None, "attempt": attempt}
         except Exception as exc:
             return {"error": f"Could not build the topic checklist ({type(exc).__name__}).", "attempt": attempt}
 
     def assess_node(state: AnalysisState) -> dict:
         """Assess every topic against its own retrieved evidence."""
-        results = [assess_topic(t, state["video_id"], embeddings, state["language"], call) for t in state["topics"]]
+        results = [assess_topic(t, state["video_id"], embeddings, state["language"], call,
+                                cache=cache, text_hash=state.get("text_hash", "")) for t in state["topics"]]
         scored = [r for r in results if r.assessed]
         if not scored:
             return {"results": results, "error": "The language model failed on every topic. Please try again later."}
@@ -98,6 +103,7 @@ def build_analysis_graph(embeddings: Embeddings, call: LlmCall = llm.call_struct
             goal=state["goal"], level=state["level"], overall_score=rubric.overall_score(criteria),
             criteria=criteria, topics=state["results"], strengths=h.strengths, limitations=h.limitations,
             recommended_next_topics=h.recommended_next_topics, caveats=CAVEATS, warnings=state.get("warnings", []),
+            reused_topics=sum(r.from_cache for r in state["results"]),
         )
         return {"report": report}
 
@@ -141,11 +147,12 @@ def build_analysis_graph(embeddings: Embeddings, call: LlmCall = llm.call_struct
 
 
 def run_analysis(graph, video_id: str, segments: list[Segment], goal: str, level: Level,
-                 language: str = "English", topics: Optional[list[str]] = None,
-                 comments: Optional[str] = None) -> SuitabilityReport:
+                 language: str = "English", topics: Optional[list[Union[str, Topic]]] = None,
+                 comments: Optional[str] = None, max_topics: int = DEFAULT_TOPICS) -> SuitabilityReport:
     """Invoke the graph and turn a recorded error into an AnalysisError."""
     final = graph.invoke({"video_id": video_id, "segments": segments, "goal": goal, "level": level,
-                          "language": language, "custom_topics": topics, "comments_text": comments})
+                          "language": language, "custom_topics": topics, "comments_text": comments,
+                          "max_topics": max_topics, "text_hash": transcript_hash(segments)})
     if final.get("error"):
         raise AnalysisError(final["error"])
     return final["report"]

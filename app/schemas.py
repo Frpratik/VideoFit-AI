@@ -104,6 +104,7 @@ class TopicResult(BaseModel):
     reason: str
     citations: list[Citation] = Field(default_factory=list)
     assessed: bool = True  # False if the LLM failed for this topic (excluded from the score)
+    from_cache: bool = False  # True if an earlier identical assessment was reused (no tokens spent)
 
 
 class HolisticAssessment(BaseModel):
@@ -153,6 +154,7 @@ class SuitabilityReport(BaseModel):
     caveats: list[str]
     warnings: list[str] = Field(default_factory=list)
     comment_insights: Optional[CommentInsights] = None
+    reused_topics: int = 0  # how many topic assessments came from the cache
 
 
 class QuestionPlan(BaseModel):

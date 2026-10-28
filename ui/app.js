@@ -132,12 +132,14 @@ $("load-form").addEventListener("submit", async (ev) => {
     const topics = $("topics").value.split("\n").map((t) => t.trim()).filter(Boolean);
     const res = await api("/api/analyze", {
       session_id: state.session, goal, level: $("level").value, language: $("language").value,
-      topics, comments: $("comments").value,
+      topics, comments: $("comments").value, max_topics: Number($("max-topics").value),
+      // After "Reuse this checklist" send the full topics (description and importance), unless the list was edited.
+      topic_specs: state.reuse && $("topics").value === state.reuse.text ? state.reuse.specs : [],
     });
     clearInterval(tick);
     state.report = res.report; state.duration = res.duration_sec;
     $("chat-language").value = $("language").value;
-    renderDashboard(res.report);
+    renderDashboard(res.report, res.usage);
     renderSuggestions();
     setStatus(d ? "Done. " + loadSummary(d) : "Done.");
     showView("dash");
@@ -209,7 +211,17 @@ function feedbackGroup(title, items) {
     h("li", {}, it.text, it.example_comment ? h("blockquote", { text: it.example_comment }) : null))));
 }
 
-function renderDashboard(r) {
+function usageText(usage, reused) {
+  const parts = [];
+  if (usage) {
+    const total = usage.input_tokens + usage.output_tokens;
+    parts.push(`${usage.calls} model calls · about ${total.toLocaleString()} tokens`);
+  }
+  if (reused) parts.push(`${reused} topic${reused > 1 ? "s" : ""} reused from an earlier run (no tokens spent)`);
+  return parts.join(" · ");
+}
+
+function renderDashboard(r, usage) {
   const root = $("dash");
   const counts = { covered: 0, partial: 0, not_detected: 0 };
   r.topics.forEach((t) => t.assessed && counts[t.coverage]++);
@@ -220,6 +232,8 @@ function renderDashboard(r) {
         h("dt", { text: "Your goal" }), h("dd", { text: r.goal }),
         h("dt", { text: "Level" }), h("dd", { text: r.level }),
         h("dt", { text: "Topics" }), h("dd", { text: `${counts.covered} covered · ${counts.partial} partial · ${counts.not_detected} not detected` }),
+        usage || r.reused_topics ? h("dt", { text: "Model usage for this run" }) : null,
+        usage || r.reused_topics ? h("dd", { text: usageText(usage, r.reused_topics) }) : null,
         h("dt", { text: "About this score" }), h("dd", { class: "hint", text: "A weighted heuristic (40/25/15/10/10), not a validated measurement. Read the evidence below." }))),
     h("section", { class: "section panel" }, h("h2", { text: "Score breakdown" }),
       r.criteria.map((c) => h("div", { class: "crit" },
@@ -251,6 +265,7 @@ function renderDashboard(r) {
 function reuseChecklist() {
   if (!state.report) return;
   $("topics").value = state.report.topics.map((t) => t.topic.name).join("\n");
+  state.reuse = { text: $("topics").value, specs: state.report.topics.map((t) => t.topic) };
   $("topics").closest("details").open = true;
   showView("load");
   toast("Checklist copied to the Load page. Press Analyze video to re-run with the same topics.");
@@ -282,13 +297,15 @@ function citationRow(c) {
 
 function botMessage(res) {
   const a = res.answer;
+  const failed = a.warnings.some((w) => w.startsWith("LLM error"));
+  const tokens = res.usage ? res.usage.input_tokens + res.usage.output_tokens : 0;
   return h("div", { class: "msg bot" },
-    h("div", { class: "label", text: a.evidence_found ? "From the video" : "Not found in the transcript" }),
+    h("div", { class: "label", text: failed ? "Model error" : a.evidence_found ? "From the video" : "Not found in the transcript" }),
     ...a.answer_from_transcript.split(/\n+/).map((p) => h("p", { text: p })),
     a.general_knowledge_note ? h("div", { class: "outside" }, h("div", { class: "label out", text: "Outside the video (general knowledge)" }), a.general_knowledge_note) : null,
     a.citations.length ? h("div", { class: "cites" }, a.citations.map(citationRow)) : null,
     ...a.warnings.map((w) => h("div", { class: "warn", text: "⚠ " + w })),
-    res.understood_as ? h("div", { class: "understood", text: "Searched as: " + res.understood_as }) : null);
+    res.understood_as ? h("div", { class: "understood", text: "Searched as: " + res.understood_as + (tokens ? ` · ~${tokens.toLocaleString()} tokens` : "") }) : null);
 }
 
 async function ask(question) {

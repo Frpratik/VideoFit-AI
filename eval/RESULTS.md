@@ -88,6 +88,8 @@ covered") and into the comments.
 ## 6. Cost and limits
 
 - A full analysis made about 12 model calls on average (96 calls over 8 runs) and used about **16,500 tokens** (131,640 tokens over those 8 runs, 20b, measured).
+- (Measured before the default was lowered to 8 topics and before assessments were cached; a later 4-topic run used
+  about 8,000 tokens, and a cached re-run about 1,500.)
 - The free Groq tier gives 200,000 tokens per day per model. About 12 analyses plus some chat per day is the budget. Running
   these evaluations used up the 120b allowance, which also produced one batch of "rate limit" errors that the app
   handled with a polite message.

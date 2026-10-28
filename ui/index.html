@@ -57,8 +57,12 @@
 
             <details>
               <summary>Topic checklist <span class="muted">(optional)</span></summary>
-              <p class="hint">One topic per line. Leave empty to let the model build a checklist from your goal. Writing your own makes repeated scores comparable.</p>
+              <p class="hint">One topic per line. Leave empty to let the model build a checklist from your goal. Writing your own makes repeated scores comparable, and unchanged topics are reused without spending tokens.</p>
               <textarea id="topics" rows="4" placeholder="Gradient descent&#10;Backpropagation&#10;Overfitting"></textarea>
+              <label for="max-topics">Topics to auto-generate <span class="muted">(each costs about 1,400 tokens)</span></label>
+              <select id="max-topics">
+                <option>4</option><option>6</option><option selected>8</option><option>10</option><option>12</option>
+              </select>
             </details>
 
             <details>
